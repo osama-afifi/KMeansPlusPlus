@@ -4,11 +4,14 @@
 #include <random>
 #include <assert.h>
 
+typedef std::vector<double> datapoint;
+
 class KmeansPP
 {	
+
 public:
 
-	typedef std::vector<double> datapoint;
+	//typedef std::vector<double> datapoint;
 
 	/*	Takes the input data where each data point is in a vector<double> format */
 	KmeansPP(const std::vector<datapoint> &input_data);
@@ -18,7 +21,12 @@ public:
 	/*	Run the K-Means++ (Plus Plus) Algorithm
 		Takes the number of desired clusters K
 		Returns a vector for each cluster which includes the indices of their corresponding data points	*/
-	std::vector<std::vector<int> > getKmeansPP(int K);
+	std::vector<std::vector<int> > getClusters(int K);
+
+	/*	Run the K-Means++ (Plus Plus) Algorithm
+		Takes the number of desired clusters K
+		Returns a vector of centroids	*/
+	std::vector<datapoint> getCentroids(int K);
 	
 private:
 	

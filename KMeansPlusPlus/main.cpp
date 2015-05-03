@@ -30,7 +30,7 @@ int main()
 	// Sample K-Means Plus Plus Run
 	int K=3;
 	KmeansPP KMPP(data);	
-	vector<vector<int> > clusters_ = KMPP.getKmeansPP(3);
+	vector<vector<int> > clusters_ = KMPP.getClusters(3);
 
 	// Print Results
 	for(int i = 0 ; i<clusters_.size() ; i++)

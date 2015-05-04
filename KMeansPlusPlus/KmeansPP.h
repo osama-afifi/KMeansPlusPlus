@@ -19,14 +19,10 @@ public:
 	~KmeansPP(void);
 
 	/*	Run the K-Means++ (Plus Plus) Algorithm
-		Takes the number of desired clusters K
+		Takes the number of desired clusters K and passed vector of datapoints (vector of doubles) as input
 		Returns a vector for each cluster which includes the indices of their corresponding data points	*/
-	std::vector<std::vector<int> > getClusters(int K);
+	std::vector<std::vector<int> > RunKMeansPP(int K, vector<datapoint> &centroids);
 
-	/*	Run the K-Means++ (Plus Plus) Algorithm
-		Takes the number of desired clusters K
-		Returns a vector of centroids	*/
-	std::vector<datapoint> getCentroids(int K);
 	
 private:
 	

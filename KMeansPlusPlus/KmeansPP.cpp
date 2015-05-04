@@ -9,7 +9,7 @@ KmeansPP::KmeansPP(const std::vector<datapoint> &input_data)
 KmeansPP::~KmeansPP(void)
 {}
 
-vector<vector<int> > KmeansPP::getClusters(int K)
+vector<vector<int> > KmeansPP::RunKMeansPP(int K, vector<datapoint> &centroids)
 {
 	assert(K<=input_data.size());
 	vector<vector<int> > clusters_vec(K); 
@@ -35,34 +35,9 @@ vector<vector<int> > KmeansPP::getClusters(int K)
 	// Push resuts into the clusters vector
 	for(int i = 0 ; i<input_data.size() ; i++)
 		clusters_vec[nearest_cluster_idx[i]].push_back(i);
-
+	centroids = cur_centroids_;
 	return clusters_vec;
 }
-
-vector<datapoint> KmeansPP::getCentroids(int K)
-{
-	assert(K<=input_data.size());
-	// First: initalize the initial centroids according to K-Means Plus Plus Algorithm
-	init();
-	int first_centroid = random_index_gen(random_engine);
-	initial_centroids_.push_back(input_data[first_centroid]);
-	for(int i=1 ; i<K ; i++)
-	{
-		updateNearestClusters(initial_centroids_);
-		initial_centroids_.push_back(input_data[getNextInitialCentroidIndex()]);
-	}
-	// Second: Continue as in the regular K-means clustering algoithm
-	cur_centroids_ = initial_centroids_;
-	do
-	{
-		prev_centroids_ = cur_centroids_;
-		updateNearestClusters(cur_centroids_);
-		updateCentroids(cur_centroids_);
-	}
-	while(!equalCentroids(cur_centroids_,prev_centroids_));
-	return cur_centroids_;
-}
-
 
 int KmeansPP::getNextInitialCentroidIndex()
 {
